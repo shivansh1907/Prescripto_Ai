@@ -2,6 +2,7 @@ from app.models.output_model import PrescriptionOutput
 from app.controllers.llm_service import extract_from_image
 from fastapi import APIRouter, File, UploadFile, HTTPException
 import json
+from fastapi.responses import JSONResponse
 
 from app.utils.output_parser import safe_parse_json
 
@@ -20,10 +21,15 @@ async def prescription(file: UploadFile = File(...)):
     if len(image_bytes) > 5 * 1024 * 1024:
         raise HTTPException(status_code=400, detail="Image too large. Max 5MB.")
 
-    result = extract_from_image(image_bytes, file.content_type)  # pass mime_type
+    try:
+
+       result = extract_from_image(image_bytes, file.content_type)  # pass mime_type
+       result = result.replace("```json", "").replace("```", "").strip()
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"LLM extraction failed: {str(e)}")
      # Debugging line
-    result = result.replace("```json", "").replace("```", "").strip()
-    print("Raw model output:", result) 
+   
+    print("Raw model output:", result)  
 
 
     try:
@@ -33,4 +39,4 @@ async def prescription(file: UploadFile = File(...)):
     except ValueError as e:
         raise HTTPException(status_code=500, detail=f"Invalid JSON from model: {result}")
 
-    return parsed
+    return JSONResponse( status_code=200, content=parsed)
