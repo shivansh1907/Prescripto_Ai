@@ -20,7 +20,7 @@ const Home = () => {
         formdata.append("file", file)
 
         try{
-            const res=await axios.post("http://localhost:8000/parse-image",formdata)
+            const res=await axios.post("https://prescriptoai-production.up.railway.app/parse-image",formdata)
             console.log(res.data)
              setloading(false)
              setresult(res.data)
