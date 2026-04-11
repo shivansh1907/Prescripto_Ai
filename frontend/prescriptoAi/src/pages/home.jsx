@@ -97,7 +97,7 @@ const Home = () => {
             <div className='w-full h-1/4 border-b border-b-gray-300'> <h2 className='text-blue-700 m-3 sm:text-xl font-extrabold'>CHIEF COMPLAINTS</h2></div>
              <div className='w-full h-3/4 border-b-gray-300 p-1 flex gap-2 flex-wrap '> 
              { result?.chief_complaints?.map((comp,ind)=>(
-                <div key={ind} className='w-20 mt-3 h-13 bg-red-200 p-1  text-red-700 text-sm rounded-xl'>
+                <div key={ind} className='sm:w-20 mt-3 sm:h-13  w-15 h-8  bg-red-200 p-1 text-[9px]  text-red-700 sm:text-sm rounded-xl flex items-center justify-center'>
                     {comp}
                 </div>
               ))
@@ -105,9 +105,9 @@ const Home = () => {
             </div>
              <div className='bg-white w-1/2 h-full rounded-xl flex flex-col '>
             <div className='w-full h-1/4 border-b border-b-gray-300'> <h2 className='text-blue-700 m-3 sm:text-xl font-extrabold'>DIAGNOSIS</h2></div>
-             <div className='w-full h-3/4 border-b-gray-300'> 
+             <div className='w-full h-3/4 border-b-gray-300 flex flex-wrap gap-2 p-1'> 
               { result?.diagnosis?.map((dia,ind)=>(
-                <div key={ind} className='w-25 mt-3 h-13 bg-blue-200 p-2  text-blue-900 text-sm rounded-xl'>
+                <div key={ind} className='sm:w-25 mt-3 sm:h-13 bg-blue-200 p-2 w-16 h-8 text-[9px]   text-blue-900 sm:text-sm rounded-xl flex items-center justify-center'>
                     {dia}
                 </div>
               ))
@@ -119,7 +119,7 @@ const Home = () => {
 
         <div className='w-full m-3 bg-white h-auto rounded-xl position-relative '>
             <div className='w-full h-1/4 border-b border-b-gray-300'> <h2 className='text-blue-700 m-3 sm:text-xl font-extrabold'>MEDICATIONS</h2></div>
-             <div className='w-full h-3/4 border-b-gray-300 flex flex-col pb-2 items-center gap-2'> 
+             <div className='w-full h-3/4 border-b-gray-300 flex flex-col pt-2 pb-3 items-center gap-2'> 
              {result?.medications?.map((med,ind)=>(
                  <div key={ind} className='w-[80%] h-20 border-l-3 mt-3 bg-stone-50 rounded-xl flex flex-row items-center justify-between border-l-green-400'>
                     <div className='flex flex-col items-start justify-center p-1 ml-4'>
@@ -130,7 +130,7 @@ const Home = () => {
                         </div>
 
                     </div>
-                    <div className='flex items-center justify-center p-1 mr-4 w-18 rounded-xl bg-green-200 text-green-700'>{med.dosage}</div>
+                  {med.dosage.length>0 &&  <div className='flex items-center justify-center p-1 mr-4 w-18 rounded-xl bg-green-200 text-green-700'>{med.dosage}</div>}
 
 
                  </div>
@@ -144,9 +144,9 @@ const Home = () => {
           <div className='flex flex-row justify-between items center gap-3 w-full h-40'>
             <div className='bg-white w-1/2 h-full rounded-xl flex flex-col '>
             <div className='w-full h-1/4 border-b border-b-gray-300'> <h2 className='text-blue-700 m-3 sm:text-xl font-extrabold'>LAB TESTS</h2></div>
-             <div className='w-full h-3/4 border-b-gray-300'> 
+             <div className='w-full h-3/4 border-b-gray-300 flex flex-wrap flex-row gap-2'> 
                 { result?.lab_tests?.map((lab,ind)=>(
-                    <div key={ind} className='w-25 mt-3 h-13 bg-purple-200 p-2  text-purple-900 text-sm rounded-xl'>
+                    <div key={ind} className='w-18 mt-3 h-9 bg-purple-200 p-2  text-purple-900 text-sm rounded-xl'>
                         {lab}
                     </div>
                 ))}
@@ -154,15 +154,31 @@ const Home = () => {
             </div>
              <div className='bg-white w-1/2 h-full rounded-xl flex flex-col '>
             <div className='w-full h-1/4 border-b border-b-gray-300'> <h2 className='text-blue-700 m-3 sm:text-xl font-extrabold'>RADIOLOGY TESTS</h2></div>
-             <div className='w-full h-3/4 border-b-gray-300'> 
+             <div className='w-full h-3/4 border-b-gray-300 flex flex-wrap gap-2'> 
                 { result?.radiology_tests?.map((rad,ind)=>(
-                    <div key={ind} className='w-25 mt-3 h-13 bg-yellow-200 p-2  text-yellow-900 text-sm rounded-xl'>
+                    <div key={ind} className='w-18 mt-3 h-9 bg-yellow-200 p-2  text-yellow-900 text-sm rounded-xl'>
                         {rad}
                     </div>
                 ))}
              </div>
             </div>
         </div>
+
+        {result?.advice?.length>0 ? 
+        <div className='flex flex-col items-start justify-center w-full h-auto bg-white rounded-xl p-3'>
+
+            <h1 className='mb-3'>ADVICE</h1>
+          { result?.advice?.map((adv,ind)=>(
+                <div key={ind} className='w-full h-auto bg-green-50 rounded-xl p-2 mb-2 text-green-900'>
+                    {adv}
+                </div>
+            ))
+        }
+            
+
+
+        </div>
+        :null}
 
     
        </section> : null
