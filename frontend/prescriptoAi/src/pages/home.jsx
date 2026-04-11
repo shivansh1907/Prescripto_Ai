@@ -86,11 +86,23 @@ const Home = () => {
                 <span className='text-gray-400 text-sm'>{File ? File.name : "No file selected"}</span>
             </div>
 
+            
+
             <div className='flex justify-center items-center text-white bg-green-300  mr-3 rounded-md p-1'><h3>Extracted</h3></div>
 
 
             
         </div>
+
+        <div  className='w-full h-8 flex items-center justify-between'>
+            <h2 className='text-xl'>Name: {result?.patient_name}</h2>
+            <h2 className='text-xl'>Age: {result?.patient_age}</h2>
+        </div>
+
+        <div className='w-full h-8 flex items-center'>
+            <h2>Confidence Score: {result?.confidence_score?.toFixed(2)}</h2>
+        </div>
+
 
         <div className='flex flex-row justify-between items center gap-3 w-full h-40'>
             <div className='bg-white w-1/2 h-auto rounded-xl flex flex-col '>
@@ -130,7 +142,7 @@ const Home = () => {
                         </div>
 
                     </div>
-                  {med.dosage.length>0 &&  <div className='flex items-center justify-center p-1 mr-4 w-18 rounded-xl bg-green-200 text-green-700'>{med.dosage}</div>}
+                  {med.dosage &&  <div className='flex items-center justify-center p-1 mr-4 w-18 rounded-xl bg-green-200 text-green-700'>{med.dosage}</div>}
 
 
                  </div>
@@ -149,6 +161,7 @@ const Home = () => {
                     <div key={ind} className='w-18 mt-3 h-9 bg-purple-200 p-2  text-purple-900 text-sm rounded-xl'>
                         {lab}
                     </div>
+                    
                 ))}
              </div>
             </div>

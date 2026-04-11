@@ -8,6 +8,9 @@ AI-powered prescription parser that converts doctor prescription images into str
 
 Upload a photo of any doctor's prescription (handwritten or printed) and get back a clean structured JSON with:
 
+  `patient_name` -name of patient 
+  `patient_age` - age of patient
+  `confidence_score`- returns confidence score of the model
 - `chief_complaints` — symptoms the patient reported
 - `diagnosis` — doctor's final assessment
 - `medications` — name, dosage, frequency, duration
@@ -91,8 +94,8 @@ import os
 from dotenv import load_dotenv
 from pathlib import Path
 
-dotenv_path = Path(__file__).resolve().parent.parent.parent / ".env"
-load_dotenv(dotenv_path=dotenv_path)
+
+load_dotenv()
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 ```
